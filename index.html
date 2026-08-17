@@ -16,6 +16,26 @@
   .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
   @media(max-width:900px){.hero-grid{grid-template-columns:1fr;}.hero{padding-bottom:64px;}}
 
+  /* hero shade card — rotating featured swatch, links to Shade Library */
+  .hero-shade-card{
+    display:block;border-radius:6px;overflow:hidden;border:1px solid var(--line);
+    box-shadow:var(--shadow-lg);text-decoration:none;color:var(--espresso);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .hero-shade-card:hover,.hero-shade-card:focus-visible{transform:translateY(-6px);box-shadow:0 30px 70px -20px rgba(43,33,29,.35);}
+  .hero-shade-color{aspect-ratio:1/1;background:#D8AFA0;transition:background-color 1s ease;}
+  .hero-shade-info{display:flex;justify-content:space-between;align-items:baseline;padding:18px 22px;background:var(--paper);}
+  .hero-shade-name{font-family:'Cormorant',serif;font-style:italic;font-size:1.32rem;transition:opacity .35s ease;}
+  .hero-shade-code{font-size:.7rem;color:var(--espresso-soft);transition:opacity .35s ease;}
+  .hero-shade-cta{
+    background:var(--wine);color:var(--ivory);font-family:'IBM Plex Mono',monospace;font-size:.72rem;
+    text-transform:uppercase;letter-spacing:.08em;padding:15px 22px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .hero-shade-cta svg{width:14px;height:14px;transition:transform .2s ease;}
+  .hero-shade-card:hover .hero-shade-cta svg,.hero-shade-card:focus-visible .hero-shade-cta svg{transform:translateX(4px);}
+  @media(max-width:900px){.hero-shade-card{max-width:360px;}}
+
   /* facts strip */
   .facts{background:var(--espresso);color:var(--ivory);padding:26px 0;}
   .facts-row{display:flex;flex-wrap:wrap;gap:22px 44px;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.03em;text-transform:uppercase;}
@@ -97,13 +117,17 @@
         </div>
       </div>
       <div class="reveal">
-        <div class="shade-strip">
-          <div class="swatch"><span class="swatch-chip" style="background:#D8AFA0"></span><span class="swatch-name">Terracotta Hour</span><span class="swatch-code mono">N&deg;04</span></div>
-          <div class="swatch"><span class="swatch-chip" style="background:#7A2E3B"></span><span class="swatch-name">Monroe Wine</span><span class="swatch-code mono">N&deg;11</span></div>
-          <div class="swatch"><span class="swatch-chip" style="background:#EAD9B8"></span><span class="swatch-name">Champagne Toast</span><span class="swatch-code mono">N&deg;02</span></div>
-          <div class="swatch"><span class="swatch-chip" style="background:#B8482F"></span><span class="swatch-name">First Frost Red</span><span class="swatch-code mono">N&deg;09</span></div>
-          <div class="swatch"><span class="swatch-chip" style="background:#3C3532"></span><span class="swatch-name">Espresso Bar</span><span class="swatch-code mono">N&deg;14</span></div>
-        </div>
+        <a href="gallery.html" class="hero-shade-card" id="heroShadeCard" aria-label="Browse the full Shade Library">
+          <div class="hero-shade-color" id="heroShadeColor"></div>
+          <div class="hero-shade-info">
+            <span class="hero-shade-name" id="heroShadeName">Terracotta Hour</span>
+            <span class="hero-shade-code mono" id="heroShadeCode">N&deg;04</span>
+          </div>
+          <div class="hero-shade-cta">
+            <span>Browse the Shade Library</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </a>
       </div>
     </div>
   </section>
