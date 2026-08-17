@@ -51,11 +51,14 @@ function initHeroShadeRotator() {
   show(0);
 
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
 
   let timer;
   function tick() {
     idx = (idx + 1) % shades.length;
+    if (prefersReduced) {
+      show(idx); // still cycle content, just skip the fade for reduced-motion users
+      return;
+    }
     nameEl.style.opacity = 0;
     codeEl.style.opacity = 0;
     setTimeout(() => { show(idx); nameEl.style.opacity = 1; codeEl.style.opacity = 1; }, 350);
