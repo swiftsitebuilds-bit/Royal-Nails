@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Appointment | Royal Nails + Spa — Monroe, CT</title>
+<meta name="description" content="Book your appointment at Royal Nails + Spa in Monroe, CT. Choose a service, pick a date and time, and confirm in under a minute.">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .book-layout{display:grid;grid-template-columns:1.4fr .9fr;gap:48px;align-items:start;}
+  @media(max-width:960px){.book-layout{grid-template-columns:1fr;}}
+
+  .booking-card{background:var(--paper);border:1px solid var(--line);border-radius:4px;box-shadow:var(--shadow-lg);overflow:hidden;}
+  .booking-card-head{
+    background:var(--espresso);color:var(--ivory);padding:22px 30px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;
+  }
+  .booking-card-head span:last-child{color:var(--gold-soft);}
+  .booking-body{padding:34px 32px 38px;}
+
+  .step{margin-bottom:34px;}
+  .step:last-child{margin-bottom:0;}
+  .step-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--espresso-soft);margin-bottom:14px;display:flex;align-items:center;gap:10px;
+  }
+  .step-label .n{
+    width:20px;height:20px;border-radius:50%;background:var(--wine);color:var(--ivory);
+    display:inline-flex;align-items:center;justify-content:center;font-size:.66rem;flex-shrink:0;
+  }
+
+  /* service pills */
+  .pill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .pill{
+    border:1px solid var(--line);background:var(--ivory);border-radius:3px;padding:13px 16px;
+    text-align:left;cursor:pointer;font-family:'Manrope',sans-serif;font-size:.88rem;
+    transition:border-color .15s ease, background .15s ease, transform .1s ease;
+  }
+  .pill .p-name{display:block;font-weight:600;color:var(--espresso);}
+  .pill .p-price{display:block;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--espresso-soft);margin-top:2px;}
+  .pill:hover{border-color:var(--wine);}
+  .pill.selected{background:var(--blush-pale);border-color:var(--wine);box-shadow:inset 0 0 0 1px var(--wine);}
+
+  /* calendar */
+  .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .cal-head .cal-month{font-family:'Cormorant',serif;font-size:1.2rem;font-style:italic;}
+  .cal-nav{display:flex;gap:8px;}
+  .cal-nav button{
+    width:30px;height:30px;border:1px solid var(--line);background:var(--paper);border-radius:50%;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--espresso);
+  }
+  .cal-nav button:hover{border-color:var(--wine);color:var(--wine);}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .cal-dow{font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-transform:uppercase;color:var(--espresso-soft);text-align:center;padding-bottom:4px;}
+  .cal-day{
+    aspect-ratio:1;border:1px solid transparent;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:.86rem;
+    cursor:pointer;background:transparent;color:var(--espresso);
+  }
+  .cal-day:hover:not(.disabled):not(.empty){border-color:var(--wine);}
+  .cal-day.selected{background:var(--wine);color:var(--ivory);}
+  .cal-day.disabled{color:var(--line);cursor:not-allowed;}
+  .cal-day.empty{visibility:hidden;cursor:default;}
+
+  /* time slots */
+  .time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
+  .time-pill{
+    border:1px solid var(--line);background:var(--ivory);border-radius:3px;padding:10px 6px;
+    text-align:center;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:.78rem;
+  }
+  .time-pill:hover{border-color:var(--wine);}
+  .time-pill.selected{background:var(--wine);border-color:var(--wine);color:var(--ivory);}
+  .time-empty{grid-column:1/-1;font-size:.85rem;color:var(--espresso-soft);padding:8px 0;}
+
+  /* contact fields */
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--espresso-soft);margin-bottom:6px;}
+  .field input,.field textarea{
+    width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:3px;
+    font-family:'Manrope',sans-serif;font-size:.92rem;background:var(--ivory);color:var(--espresso);
+  }
+  .field input:focus,.field textarea:focus{outline:2px solid var(--wine);outline-offset:1px;background:var(--paper);}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:520px){.field-row{grid-template-columns:1fr;}.pill-grid{grid-template-columns:1fr;}.time-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .summary-bar{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+    background:var(--blush-pale);border:1px solid var(--line);border-radius:3px;padding:16px 20px;margin-bottom:22px;
+    font-size:.85rem;
+  }
+  .summary-bar .empty-note{color:var(--espresso-soft);}
+  .summary-bar strong{font-family:'Cormorant',serif;font-style:italic;font-size:1.05rem;font-weight:500;}
+
+  /* confirmation ticket */
+  .ticket{
+    background:var(--paper);border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:var(--shadow-lg);
+    position:relative;
+  }
+  .ticket-top{padding:34px 32px 22px;text-align:center;}
+  .ticket-top .check{
+    width:54px;height:54px;border-radius:50%;background:var(--wine);margin:0 auto 18px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ticket-top .check svg{width:24px;height:24px;stroke:var(--ivory);stroke-width:2.4;}
+  .ticket-cut{
+    height:0;border-top:1.5px dashed var(--line);position:relative;margin:0 32px;
+  }
+  .ticket-cut::before,.ticket-cut::after{
+    content:"";position:absolute;top:-11px;width:22px;height:22px;border-radius:50%;background:var(--ivory);
+  }
+  .ticket-cut::before{left:-43px;}
+  .ticket-cut::after{right:-43px;}
+  .ticket-details{padding:26px 32px 34px;}
+  .ticket-row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--line);font-size:.9rem;}
+  .ticket-row:last-child{border-bottom:none;}
+  .ticket-row .k{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;color:var(--espresso-soft);letter-spacing:.05em;}
+  .ticket-row .v{font-weight:600;text-align:right;}
+  .ticket-num{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--espresso-soft);text-align:center;margin-top:22px;letter-spacing:.06em;}
+  .ticket-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;}
+  .ticket-actions .btn{flex:1;}
+
+  /* info card */
+  .info-card{background:var(--espresso);color:var(--ivory);border-radius:4px;padding:34px 30px;}
+  .info-card h3{color:var(--ivory);font-size:1.4rem;}
+  .info-card p{color:rgba(250,245,239,.68);}
+  .info-list{list-style:none;padding:0;margin:22px 0 0;}
+  .info-list li{padding:12px 0;border-top:1px solid rgba(250,245,239,.14);font-size:.88rem;display:flex;justify-content:space-between;gap:12px;}
+  .info-list li:last-child{border-bottom:1px solid rgba(250,245,239,.14);}
+  .info-list .k{color:rgba(250,245,239,.5);font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;}
+  .live-note{
+    margin-top:22px;padding:16px 18px;background:rgba(250,245,239,.08);border:1px solid rgba(250,245,239,.16);
+    border-radius:3px;font-size:.8rem;color:rgba(250,245,239,.65);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <span class="word">Royal Nails <em style="font-style:italic;color:var(--wine);">+</em> Spa</span>
+      <span class="sub">Monroe, Connecticut</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services &amp; Pricing</a></li>
+      <li><a href="gallery.html">Shade Library</a></li>
+      <li><a href="book.html" class="active">Book</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="nav-phone" href="tel:2038809980">(203) 880-9980</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="eyebrow">Reserve Your Spot</p>
+      <h1>Book your appointment</h1>
+      <p class="lede">Choose a service, pick a day and time, and add your details. You'll get a confirmation on screen right away.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:60px;">
+    <div class="wrap book-layout">
+
+      <!-- BOOKING WIDGET -->
+      <div id="bookingWrap">
+
+        <!-- ACTIVE FORM -->
+        <div class="booking-card reveal" id="bookingForm">
+          <div class="booking-card-head"><span>Appointment Request</span><span id="ticketPreviewNum">RN&ndash;PREVIEW</span></div>
+          <div class="booking-body">
+
+            <div class="summary-bar" id="summaryBar">
+              <span class="empty-note">Select a service to begin.</span>
+            </div>
+
+            <div class="step">
+              <div class="step-label"><span class="n">1</span>Choose a service</div>
+              <div class="pill-grid" id="serviceGrid"></div>
+            </div>
+
+            <div class="step">
+              <div class="step-label"><span class="n">2</span>Choose a date</div>
+              <div class="cal-head">
+                <button class="cal-nav" style="width:auto;border-radius:3px;padding:0 10px;" id="prevMonth" aria-label="Previous month">&larr;</button>
+                <span class="cal-month" id="calMonthLabel"></span>
+                <button class="cal-nav" style="width:auto;border-radius:3px;padding:0 10px;" id="nextMonth" aria-label="Next month">&rarr;</button>
+              </div>
+              <div class="cal-grid" id="calDow"></div>
+              <div class="cal-grid" id="calDays" style="margin-top:6px;"></div>
+            </div>
+
+            <div class="step">
+              <div class="step-label"><span class="n">3</span>Choose a time</div>
+              <div class="time-grid" id="timeGrid">
+                <div class="time-empty">Pick a date to see open times.</div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-label"><span class="n">4</span>Your details</div>
+              <div class="field-row">
+                <div class="field"><label for="fName">Name</label><input id="fName" type="text" placeholder="Your full name"></div>
+                <div class="field"><label for="fPhone">Phone</label><input id="fPhone" type="tel" placeholder="(203) 555-0100"></div>
+              </div>
+              <div class="field"><label for="fEmail">Email (optional)</label><input id="fEmail" type="email" placeholder="you@email.com"></div>
+              <div class="field"><label for="fNotes">Notes (optional)</label><textarea id="fNotes" rows="2" placeholder="Shade number, nail length, allergies, etc."></textarea></div>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="confirmBtn" disabled>Confirm Appointment</button>
+            <p id="formError" style="color:var(--wine);font-size:.82rem;margin:12px 0 0;display:none;"></p>
+          </div>
+        </div>
+
+        <!-- CONFIRMATION TICKET (hidden until confirmed) -->
+        <div class="ticket reveal" id="ticketCard" style="display:none;">
+          <div class="ticket-top">
+            <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h2 style="margin-bottom:6px;">You're booked.</h2>
+            <p style="margin:0;">A confirmation has been prepared below &mdash; save it or add it to your calendar.</p>
+          </div>
+          <div class="ticket-cut"></div>
+          <div class="ticket-details">
+            <div class="ticket-row"><span class="k">Guest</span><span class="v" id="tkName"></span></div>
+            <div class="ticket-row"><span class="k">Service</span><span class="v" id="tkService"></span></div>
+            <div class="ticket-row"><span class="k">Date</span><span class="v" id="tkDate"></span></div>
+            <div class="ticket-row"><span class="k">Time</span><span class="v" id="tkTime"></span></div>
+            <div class="ticket-row"><span class="k">Studio</span><span class="v">380 Monroe Turnpike, Ste 4</span></div>
+            <div class="ticket-actions">
+              <button class="btn btn-ghost" id="icsBtn">Add to Calendar</button>
+              <button class="btn btn-ghost" id="newBookingBtn">Book Another</button>
+            </div>
+            <p class="ticket-num" id="tkNum"></p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INFO SIDEBAR -->
+      <div class="info-card reveal">
+        <h3>Royal Nails + Spa</h3>
+        <p>380 Monroe Turnpike, Ste 4<br>Monroe, CT 06468</p>
+        <ul class="info-list">
+          <li><span class="k">Phone</span><span>(203) 880-9980</span></li>
+          <li><span class="k">Mon&ndash;Sat</span><span>9:30 AM &ndash; 7:00 PM</span></li>
+          <li><span class="k">Sunday</span><span>10:00 AM &ndash; 6:00 PM</span></li>
+        </ul>
+        <div class="live-note">
+          This booking form is a working preview built for this mockup. In a real deployment, it would connect to a live scheduling system so appointments are saved, confirmed by text/email, and checked against actual staff availability.
+        </div>
+        <a href="tel:2038809980" class="btn btn-light btn-block" style="margin-top:20px;">Prefer to Call? (203) 880-9980</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <span class="word" style="font-family:'Cormorant',serif;font-size:1.3rem;">Royal Nails + Spa</span>
+        <p style="color:rgba(250,245,239,.6);margin-top:12px;max-width:34ch;font-size:.9rem;">A locally-loved nail studio in Monroe, CT — manicures, pedicures, enhancements, and waxing.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>380 Monroe Turnpike, Ste 4</li>
+          <li>Monroe, CT 06468</li>
+          <li><a href="tel:2038809980">(203) 880-9980</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon&ndash;Sat: 9:30 AM &ndash; 7:00 PM</li>
+          <li>Sun: 10:00 AM &ndash; 6:00 PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>&copy; <span id="year"></span> Royal Nails + Spa &mdash; Monroe, CT</span>
+      <span>Design mockup &middot; not a live business site</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+<script src="assets/booking.js"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Nails + Spa | Monroe, CT — Manicures, Pedicures & Waxing</title>
+<meta name="description" content="Royal Nails + Spa in Monroe, CT. Manicures, pedicures, dip powder, acrylics and waxing in a clean, welcoming studio. Book online or call (203) 880-9980.">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  /* ---------- HOME-ONLY STYLES ---------- */
+  .hero{padding:76px 0 100px;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center;}
+  .hero h1{font-size:clamp(2.7rem,5.2vw,4.3rem);max-width:11.5ch;}
+  .hero h1 em{font-style:italic;color:var(--wine);}
+  .hero-sub{font-size:1.15rem;max-width:46ch;margin-bottom:34px;}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;}.hero{padding-bottom:64px;}}
+
+  /* facts strip */
+  .facts{background:var(--espresso);color:var(--ivory);padding:26px 0;}
+  .facts-row{display:flex;flex-wrap:wrap;gap:22px 44px;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.03em;text-transform:uppercase;}
+  .facts-row span{opacity:.55;margin-right:8px;}
+
+  /* about + highlights */
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start;}
+  .about-grid .section-head{margin-bottom:0;}
+  .highlight-list{display:flex;flex-direction:column;}
+  .highlight{
+    display:grid;grid-template-columns:64px 1fr auto;gap:22px;align-items:center;
+    padding:26px 0;border-top:1px solid var(--line);
+  }
+  .highlight:last-child{border-bottom:1px solid var(--line);}
+  .highlight-num{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--gold);}
+  .highlight h3{font-size:1.25rem;margin-bottom:2px;}
+  .highlight p{margin:0;font-size:.92rem;}
+  .highlight a{font-family:'IBM Plex Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--wine);white-space:nowrap;border-bottom:1px solid var(--wine);padding-bottom:2px;}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:44px;}.highlight{grid-template-columns:44px 1fr;}.highlight a{grid-column:2;}}
+
+  /* testimonials */
+  .testimonials{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);}
+  .quote-card{padding:40px 34px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .quote-mark{font-family:'Cormorant',serif;font-size:3rem;color:var(--blush);line-height:.6;margin-bottom:14px;display:block;}
+  .quote-card p{font-family:'Cormorant',serif;font-style:italic;font-size:1.18rem;color:var(--espresso);margin-bottom:18px;}
+  .quote-attr{font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--espresso-soft);}
+  @media(max-width:900px){.quote-grid{grid-template-columns:1fr;}}
+
+  /* shade teaser */
+  .shade-teaser-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  .mini-swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .mini-swatch{aspect-ratio:1;border-radius:3px;box-shadow:inset 0 0 0 1px rgba(43,33,29,.12), var(--shadow-sm);position:relative;overflow:hidden;}
+  .mini-swatch span{position:absolute;bottom:8px;left:9px;right:9px;font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.04em;color:rgba(43,33,29,.65);}
+  @media(max-width:860px){.shade-teaser-grid{grid-template-columns:1fr;gap:36px;}}
+
+  /* cta banner */
+  .cta-banner{background:linear-gradient(155deg, var(--wine), var(--wine-dark));color:var(--ivory);text-align:center;}
+  .cta-banner h2{color:var(--ivory);font-size:clamp(2.1rem,4vw,2.9rem);}
+  .cta-banner p{color:rgba(250,245,239,.8);max-width:52ch;margin-left:auto;margin-right:auto;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <span class="word">Royal Nails <em style="font-style:italic;color:var(--wine);">+</em> Spa</span>
+      <span class="sub">Monroe, Connecticut</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="services.html">Services &amp; Pricing</a></li>
+      <li><a href="gallery.html">Shade Library</a></li>
+      <li><a href="book.html">Book</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="nav-phone" href="tel:2038809980">(203) 880-9980</a>
+      <a href="book.html" class="btn btn-primary">Book Now</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Manicures &middot; Pedicures &middot; Waxing</p>
+        <h1>Nails, done with <em>intention.</em></h1>
+        <p class="hero-sub">A clean, unhurried studio on Monroe Turnpike where the details actually get attention — from the shape of your manicure to the last coat of your pedicure.</p>
+        <div class="hero-ctas">
+          <a href="book.html" class="btn btn-primary">Book an Appointment</a>
+          <a href="services.html" class="btn btn-ghost">See Services &amp; Pricing</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="shade-strip">
+          <div class="swatch"><span class="swatch-chip" style="background:#D8AFA0"></span><span class="swatch-name">Terracotta Hour</span><span class="swatch-code mono">N&deg;04</span></div>
+          <div class="swatch"><span class="swatch-chip" style="background:#7A2E3B"></span><span class="swatch-name">Monroe Wine</span><span class="swatch-code mono">N&deg;11</span></div>
+          <div class="swatch"><span class="swatch-chip" style="background:#EAD9B8"></span><span class="swatch-name">Champagne Toast</span><span class="swatch-code mono">N&deg;02</span></div>
+          <div class="swatch"><span class="swatch-chip" style="background:#B8482F"></span><span class="swatch-name">First Frost Red</span><span class="swatch-code mono">N&deg;09</span></div>
+          <div class="swatch"><span class="swatch-chip" style="background:#3C3532"></span><span class="swatch-name">Espresso Bar</span><span class="swatch-code mono">N&deg;14</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACTS STRIP -->
+  <div class="facts">
+    <div class="wrap facts-row">
+      <div><span>Studio</span>380 Monroe Turnpike, Ste 4</div>
+      <div><span>Hours</span>Mon&ndash;Sat 9:30&ndash;7, Sun 10&ndash;6</div>
+      <div><span>Call</span>(203) 880-9980</div>
+      <div><span>Booking</span>Online or by phone</div>
+    </div>
+  </div>
+
+  <!-- ABOUT + HIGHLIGHTS -->
+  <section id="services">
+    <div class="wrap about-grid">
+      <div class="section-head reveal">
+        <p class="eyebrow">What We Do</p>
+        <h2>A full menu, one skilled team.</h2>
+        <p>Every service is done by technicians who take the time to get it right — clean lines, even color, and a studio that's genuinely relaxing to sit in.</p>
+        <a href="services.html" class="btn btn-ghost" style="margin-top:8px;">View Full Menu &amp; Pricing</a>
+      </div>
+      <div class="highlight-list reveal">
+        <div class="highlight">
+          <span class="highlight-num mono">01</span>
+          <div><h3>Manicures</h3><p>Classic, gel, and dip powder — shaped and finished to last.</p></div>
+          <a href="services.html">Details</a>
+        </div>
+        <div class="highlight">
+          <span class="highlight-num mono">02</span>
+          <div><h3>Pedicures</h3><p>Soak, scrub, and polish, with a chair massage built in.</p></div>
+          <a href="services.html">Details</a>
+        </div>
+        <div class="highlight">
+          <span class="highlight-num mono">03</span>
+          <div><h3>Acrylic &amp; Enhancements</h3><p>Full sets, fills, and sculpted extensions in any length.</p></div>
+          <a href="services.html">Details</a>
+        </div>
+        <div class="highlight">
+          <span class="highlight-num mono">04</span>
+          <div><h3>Waxing</h3><p>Brow, lip, and facial waxing, quick and precise.</p></div>
+          <a href="services.html">Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" style="padding-top:0;">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow">In Their Words</p>
+        <h2>Why clients keep coming back.</h2>
+      </div>
+    </div>
+    <div class="wrap" style="padding:0;">
+      <div class="quote-grid reveal">
+        <div class="quote-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p>The powder manicure held up longer than any I've had elsewhere — still clean three weeks later.</p>
+          <div class="quote-attr">Monroe, CT Client</div>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p>Friendly from the second you walk in, and they're not shy about telling you what will actually last.</p>
+          <div class="quote-attr">Monroe, CT Client</div>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p>Clean, calm, and clearly run by people who care about the work — my go-to for pedicures now.</p>
+          <div class="quote-attr">Monroe, CT Client</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHADE TEASER -->
+  <section>
+    <div class="wrap shade-teaser-grid">
+      <div class="reveal">
+        <p class="eyebrow">The Shade Library</p>
+        <h2>Not sure what color? Start browsing.</h2>
+        <p>Our full color story is organized by family — neutrals, blush, red &amp; wine, and statement shades — so you can walk in with a shade already in mind.</p>
+        <a href="gallery.html" class="btn btn-ghost">Browse the Shade Library</a>
+      </div>
+      <div class="mini-swatches reveal">
+        <div class="mini-swatch" style="background:#EFE3D3;"><span>Bone</span></div>
+        <div class="mini-swatch" style="background:#E3B9AA;"><span>Blush</span></div>
+        <div class="mini-swatch" style="background:#9C3B32;"><span>Brick</span></div>
+        <div class="mini-swatch" style="background:#7A2E3B;"><span>Wine</span></div>
+        <div class="mini-swatch" style="background:#C98F5E;"><span>Clay</span></div>
+        <div class="mini-swatch" style="background:#D7C09A;"><span>Sand</span></div>
+        <div class="mini-swatch" style="background:#4B3B33;"><span>Cocoa</span></div>
+        <div class="mini-swatch" style="background:#B24A63;"><span>Berry</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--gold-soft);">Ready When You Are</p>
+      <h2>Reserve your seat.</h2>
+      <p>Pick a service, a day, and a time — takes less than a minute.</p>
+      <a href="book.html" class="btn btn-light">Book an Appointment</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <span class="word" style="font-family:'Cormorant',serif;font-size:1.3rem;">Royal Nails + Spa</span>
+        <p style="color:rgba(250,245,239,.6);margin-top:12px;max-width:34ch;font-size:.9rem;">A locally-loved nail studio in Monroe, CT — manicures, pedicures, enhancements, and waxing.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>380 Monroe Turnpike, Ste 4</li>
+          <li>Monroe, CT 06468</li>
+          <li><a href="tel:2038809980">(203) 880-9980</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon&ndash;Sat: 9:30 AM &ndash; 7:00 PM</li>
+          <li>Sun: 10:00 AM &ndash; 6:00 PM</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>&copy; <span id="year"></span> Royal Nails + Spa &mdash; Monroe, CT</span>
+      <span>Design mockup &middot; not a live business site</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
